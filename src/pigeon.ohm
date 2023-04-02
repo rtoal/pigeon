@@ -1,0 +1,62 @@
+Pigeon {
+  Program   = Stmt+
+  
+  Stmt      = PrintStmt
+            | VarDec
+            | AssignStmt
+            | WhileStmt
+            | FunDec
+            | ReturnStmt
+  
+  PrintStmt  = print Exp ";"
+  AssignStmt = Var "=" Exp ";"
+  VarDec     = let id "=" Exp ";"
+  WhileStmt  = while Exp Block
+  FunDec     = function id Params (":" Type)? Block
+  ReturnStmt = return Exp? ";"
+  
+  Params    = "(" ListOf<Param, ","> ")"
+  Param     = id ":" Type
+  Block     = "{" Stmt* "}"
+  
+  Type      = Type "[]"                   --array
+            | id
+            
+  Exp       = Condition relop Condition  --binary
+            | Condition
+  Condition = Exp ("+"|"-") Term         --binary
+            | Term
+  Term      = Term ("*"|"/"|"%") Factor  --binary
+            | Factor
+  Factor    = Primary "**" Factor        --binary
+            | Primary
+  Primary   = Call
+            | Var
+            | num
+            | strlit
+            | true
+            | false
+            | "[" ListOf<Exp, ","> "]"   --array
+            | "(" Exp ")"                --parens
+  
+  Var       = Var "[" Exp "]"            --subscript
+            | id
+  
+  Call      = id "(" ListOf<Exp, ","> ")"
+  print     = "print" ~idchar
+  let       = "let" ~idchar
+  while     = "while" ~idchar
+  function  = "function" ~idchar
+  return    = "return" ~idchar
+  true      = "true" ~idchar
+  false     = "false" ~idchar
+  
+  keyword   = print | let | while | function | return | true | false
+  
+  num       = digit+ ("." digit+)? (("E"|"e") ("+"|"-")? digit+)?
+  strlit    = "\"" char* "\""
+  char      = ~"\n" ~"\"" any
+  id        = ~keyword letter idchar*
+  idchar    = letter | digit | "_"
+  relop     = "<=" | "<" | "==" | "!=" | ">=" | ">"
+}
