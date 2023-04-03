@@ -16,6 +16,8 @@ const syntaxChecks = [
   ["assignments", "abc=9*3; a=1;"],
   ["array var assignment", "c[2] = 100;"],
   ["call", "print 5 * f(x, y, 2 * y);"],
+  ["negation", "print -2;"],
+  ["negation can come second", "print 2 ** -2;"],
   ["while with empty block", "while true {}"],
   ["while with one statement block", "while true { let x = 1; }"],
   ["nonempty array literal", "print [1, 2, 3];"],
@@ -46,6 +48,7 @@ const syntaxErrors = [
   ["numbers cannot be called", "print(500(x));", /Line 1, col 10/],
   ["string lit with newline", 'print("ab\ndef");', /col 10/],
   ["string lit with quote", 'print("ab"cdef");', /col 11/],
+  ["negation can not come first", "print -2 ** 2;", /col 11/],
 ];
 
 describe("The parser", () => {

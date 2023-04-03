@@ -29,6 +29,7 @@ Pigeon {
   Term      = Term ("*"|"/"|"%") Factor  --binary
             | Factor
   Factor    = Primary "**" Factor        --binary
+            | "-" Primary                --negation
             | Primary
   Primary   = Call
             | Var
