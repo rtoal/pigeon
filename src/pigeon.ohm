@@ -19,7 +19,7 @@ Pigeon {
   Param     = id ":" Type
   Block     = "{" Stmt* "}"
   
-  Type      = Type "[]"                   --array
+  Type      = Type "[]"                  --array
             | id
             
   Exp       = Condition relop Condition  --binary
@@ -41,7 +41,7 @@ Pigeon {
             | "(" Exp ")"                --parens
   
   Var       = Var "[" Exp "]"            --subscript
-            | id
+            | id                         --id
   
   Call      = id "(" ListOf<Exp, ","> ")"
   print     = "print" ~idchar
