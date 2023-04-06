@@ -72,6 +72,9 @@ export class ArrayType {
 
 export class Type {
   static VOID = new Type("void");
+  static BOOLEAN = new Type("boolean");
+  static NUMBER = new Type("number");
+  static STRING = new Type("string");
   constructor(description) {
     Object.assign(this, { description });
   }
@@ -90,14 +93,14 @@ export class UnaryExp {
 }
 
 export class ArrayExp {
-  constructor(elements) {
-    Object.assign(this, elements);
+  constructor(elements, type) {
+    Object.assign(this, { elements, type });
   }
 }
 
 export class SubscriptExp {
-  constructor(array, subscript) {
-    Object.assign(this, { array, subscript });
+  constructor(array, subscript, type) {
+    Object.assign(this, { array, subscript, type });
   }
 }
 
@@ -106,3 +109,7 @@ export class Call {
     Object.assign(this, { fun, args });
   }
 }
+
+Number.prototype.type = Type.NUMBER;
+Boolean.prototype.type = Type.BOOLEAN;
+String.prototype.type = Type.STRING;

@@ -37,7 +37,7 @@ Pigeon {
             | strlit
             | true
             | false
-            | "[" ListOf<Exp, ","> "]"   --array
+            | "[" NonemptyListOf<Exp, ","> "]"   --array
             | "(" Exp ")"                --parens
   
   Var       = Var "[" Exp "]"            --subscript

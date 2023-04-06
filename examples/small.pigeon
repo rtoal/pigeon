@@ -1,0 +1,12 @@
+let x = 3;
+print(x * 5);   
+
+x = 100;    // ok
+x = false;  // error
+
+print(y);   // error
+print(x);   // ok
+
+let a = ["xyz", "c"]; 
+
+print(a[0])
